@@ -11,17 +11,18 @@ export default class Swimlane extends React.Component {
           id={client.id}
           name={client.name}
           description={client.description}
-          status={client.status}
+          status={client.status} // Pass the status down to the card
         />
       );
-    })
+    });
+    
     return (
-      <div className="Swimlane-column">
+      <div className="Swimlane-column" data-status={this.props.name.toLowerCase()}>
         <div className="Swimlane-title">{this.props.name}</div>
         <div className="Swimlane-dragColumn" ref={this.props.dragulaRef}>
           {cards}
         </div>
-      </div>);
-  }
-
+      </div>
+    );
+  }  
 }
