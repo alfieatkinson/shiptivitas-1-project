@@ -52,7 +52,9 @@ export default class Board extends React.Component {
   }
   renderSwimlane(name, clients, ref) {
     return (
-      <Swimlane name={name} clients={clients} dragulaRef={ref}/>
+      <div className="Swimlane-column">
+        <Swimlane name={name} clients={clients} dragulaRef={ref}/>
+      </div>
     );
   }
 
