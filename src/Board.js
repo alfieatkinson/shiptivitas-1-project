@@ -58,6 +58,27 @@ export default class Board extends React.Component {
     );
   }
 
+  updateCardStatus(cardId, status) {
+    this.setState(prevState => {
+      const clients = prevState.clients;
+      let updatedClients = {};
+  
+      // Remove the card from the old status
+      Object.keys(clients).forEach(s => {
+        updatedClients[s] = clients[s].filter(client => client.id !== cardId);
+      });
+  
+      // Add the card to the new status
+      const card = this.getClients().find(client => client.id === cardId);
+      if (card) {
+        card.status = status; // Update the status
+        updatedClients[status].push(card);
+      }
+  
+      return { clients: updatedClients };
+    });
+  }  
+
   componentDidMount() {
     const drake = Dragula([this.swimlanes.backlog.current, this.swimlanes.inProgress.current, this.swimlanes.complete.current]);
 
