@@ -1,18 +1,30 @@
+
 import React from 'react';
 import './Card.css';
+import { v4 as uuidv4 } from 'uuid';
 
 export default class Card extends React.Component {
-  render() {
-    let className = ['Card'];
+  getCardClassName() {
+    let className = '';
     if (this.props.status === 'backlog') {
-      className.push('Card-grey');
+      className = 'Card-grey';
     } else if (this.props.status === 'in-progress') {
-      className.push('Card-blue');
+      className = 'Card-blue';
     } else if (this.props.status === 'complete') {
-      className.push('Card-green');
+      className = 'Card-green';
     }
+    return className;
+  }
+
+  render() {
+    const uniqueId = this.props.id ? `${this.props.id}-${uuidv4()}` : uuidv4();
+
     return (
-      <div className={className.join(' ')} data-id={this.props.id} data-status={this.props.status}>
+      <div 
+        className={`Card ${this.getCardClassName()}`} 
+        data-id={uniqueId} 
+        data-status={this.props.status} 
+      >
         <div className="Card-title">{this.props.name}</div>
       </div>
     );
